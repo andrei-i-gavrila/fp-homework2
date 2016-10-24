@@ -1,3 +1,6 @@
+# Author: Gavrila Andrei
+# Scope: Fundamentals of Programming homework
+
 def validate(complex_number):
     """Validates a complex number. Accepted forms <a+bi>, <a> or <bi>.
 

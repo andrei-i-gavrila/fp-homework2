@@ -1,3 +1,6 @@
+# Author: Gavrila Andrei
+# Scope: Fundamentals of Programming homework
+
 import UI
 import traceback
 import Helper

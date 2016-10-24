@@ -1,3 +1,6 @@
+# Author: Gavrila Andrei
+# Scope: Fundamentals of Programming homework
+
 import Commands
 from ComplexNumber import create
 from random import randint

@@ -1,3 +1,6 @@
+# Author: Gavrila Andrei
+# Scope: Fundamentals of Programming homework
+
 import ComplexNumber
 
 def add(ls, complex_number):
