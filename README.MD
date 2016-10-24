@@ -18,7 +18,7 @@ Modules:
 	
 	Commands 		-> Contains the main functions of the programs.
 	
-	ComplexNumber	-> Various functions regarding complex number validations, operations and other stuff.
+	ComplexNumber	-> Various functions regarding complex number validations and operations.
 	
 					-> Those 2 can be exported as is.
 	
