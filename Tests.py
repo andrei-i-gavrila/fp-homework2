@@ -6,6 +6,8 @@ import HelpCommands
 import ComplexNumber
 import Helper
 from ComplexNumber import create as cn
+import UndoTests
+
 
 def has_help(method):
     return method in dir(HelpCommands)
@@ -187,3 +189,4 @@ def run():
     HELP_random_complex()
     HELP_fake_fill()
     HELP_clear()
+    UndoTests.run()

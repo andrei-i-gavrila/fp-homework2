@@ -17,11 +17,20 @@ def cmds_list():
         "product": UI.product,
         "filter": UI.filter,
         "gen": Helper.fake_fill,
-        "clear": Helper.clear
+        "clear": Helper.clear,
+        "undo": UI.undo,
+        "lsundo": listundo
     }
 
+def listundo(ls, args, **kwargs):
+    print (ls)
+    for undo in kwargs["undo"]:
+        print("undohere")
+        for cmd in undo:
+            print(cmd)
+            print (cmd["command"], cmd["arg1"], cmd["arg2"])
 
-def invalid(ls, args):
+def invalid(ls, args, **kwargs):
     print("Invalid command. You could use some help")
 
 
@@ -42,7 +51,8 @@ def read_command():
 
 def run():
     ls = []
-    Helper.fake_fill(ls, [])
+    undo_stack = []
+    Helper.fake_fill(ls, [], undo=undo_stack)
     while True:
         cmd, args = read_command()
         if cmd == "exit":
@@ -50,7 +60,7 @@ def run():
         cmd = get_cmd(cmd)
 
         try:
-            cmd(ls, args)
+            cmd(ls, args, undo=undo_stack)
         except Exception as ex:
-            # traceback.print_exc()
+            traceback.print_exc()
             print(ex)
