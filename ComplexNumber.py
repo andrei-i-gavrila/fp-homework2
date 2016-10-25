@@ -56,7 +56,7 @@ def modulo(complex_number):
     Output data:
     The absolute value of the complex number 
     """
-    return float(complex_number["imag"]*complex_number["imag"] + complex_number["real"]*complex_number["real"])**0.5
+    return float(complex_number["imag"]**2 + complex_number["real"]**2)**0.5
 
 def add(cn1, cn2):
     """Adds 2 complex numbers

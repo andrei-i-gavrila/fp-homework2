@@ -6,61 +6,52 @@ import traceback
 import Helper
 
 def cmds_list():
-    return {
-        "help": UI.help,
-        "add": UI.add,
-        "insert": UI.insert,
-        "remove": UI.remove,
-        "replace": UI.replace,
-        "list": UI.lists,
-        "sum": UI.sums,
-        "product": UI.product,
-        "filter": UI.filter,
-        "gen": Helper.fake_fill,
-        "clear": Helper.clear,
-        "undo": UI.undo,
-        "lsundo": listundo
-    }
-
-def listundo(ls, args, **kwargs):
-    print (ls)
-    for undo in kwargs["undo"]:
-        print("undohere")
-        for cmd in undo:
-            print(cmd)
-            print (cmd["command"], cmd["arg1"], cmd["arg2"])
+	return {
+		"help": UI.help,
+		"add": UI.add,
+		"insert": UI.insert,
+		"remove": UI.remove,
+		"replace": UI.replace,
+		"list": UI.lists,
+		"sum": UI.sums,
+		"product": UI.product,
+		"filter": UI.filter,
+		"gen": Helper.fake_fill,
+		"clear": Helper.clear,
+		"undo": UI.undo,
+	}
 
 def invalid(ls, args, **kwargs):
-    print("Invalid command. You could use some help")
+	raise Exception("Invalid command. You could use some help")
 
 
 def get_cmd(command):
-    cmds = cmds_list()
-    if command in cmds:
-        return cmds[command]
-    else:
-        return invalid
+	cmds = cmds_list()
+	return cmds[command] if command in cmds else invalid
+	# if command in cmds:
+	#     return cmds[command]
+	# else:
+	#     return invalid
 
 
 def read_command():
-    long_cmd = input(">>").split()
-    if(len(long_cmd)) == 0:
-        return "gibberish", ["irrelevant"]
-    return long_cmd[0], long_cmd[1:]
+	long_cmd = input(">> ").split()
+	return (long_cmd[0].lower(), long_cmd[1:]) if len(long_cmd) != 0 else ("invalid", []) 
 
 
 def run():
-    ls = []
-    undo_stack = []
-    Helper.fake_fill(ls, [], undo=undo_stack)
-    while True:
-        cmd, args = read_command()
-        if cmd == "exit":
-            return
-        cmd = get_cmd(cmd)
+	ls, undo_stack = [], []
+	Helper.fake_fill(ls, [])
+	while True:
+		cmd, args = read_command()
 
-        try:
-            cmd(ls, args, undo=undo_stack)
-        except Exception as ex:
-            traceback.print_exc()
-            print(ex)
+		if cmd == "exit":
+			return
+
+		cmd = get_cmd(cmd)
+
+		try:
+			cmd(ls, args, undo=undo_stack)
+		except Exception as ex:
+			traceback.print_exc()
+			print("##", ex)

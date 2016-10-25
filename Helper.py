@@ -4,7 +4,7 @@
 import Commands
 from ComplexNumber import create
 from random import randint
-from Undo import new_undo
+from Undo import get_id_undo, choose_undo_id
 
 def random_complex(realbound, imagbound):
 	"""Creates a complex number with the real part in [-realbound, realbound] 
@@ -36,19 +36,12 @@ def fake_fill(ls, args, **kwargs):
 	Output data:
 	The filled list
 	"""
-	cnt = 10
-	real = 10
-	imag = 10
-	if len(args) > 0:
-		cnt = int(args[0])
-	if len(args) > 1:
-		real = int(args[1])
-	if len(args) > 2:
-		imag = int(args[2])
+	cnt = int(args[0]) if len(args) > 0 else 10
+	real = int(args[1]) if len(args) > 1 else 10
+	imag = int(args[2]) if len(args) > 2 else 10
 
 	if "undo" in kwargs:
-		undo_id = new_undo(kwargs["undo"])
-		kwargs["undo_id"] = undo_id
+		kwargs["undo_id"] = choose_undo_id(kwargs)
 	for i in range(cnt):
 		Commands.add(ls, random_complex(real, imag), **kwargs)
 	return ls
@@ -64,6 +57,5 @@ def clear(ls, args, **kwargs):
 	Returns the empty list
 	"""
 	if "undo" in kwargs:
-		kwargs["undo_id"] = new_undo(kwargs["undo"])
-	Commands.remove(ls, 0, len(ls)-1, **kwargs)
-	return ls
+		kwargs["undo_id"] = choose_undo_id(kwargs)
+	return Commands.remove(ls, 0, len(ls)-1, **kwargs)
