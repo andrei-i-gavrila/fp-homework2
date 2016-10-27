@@ -26,6 +26,7 @@ def get_id_undo(undo_stack):
 	"""
 	return last_undo(undo_stack)+1
 
+
 def push_undo(undo_stack, command):
 	"""Pushes an undo command into the batch of undo
 	
@@ -37,6 +38,7 @@ def push_undo(undo_stack, command):
 	"""
 	undo_stack.append(command)
 	return undo_stack
+
 
 def pop_undo(undo_stack):
 	"""Pops all the undo commands with the id from the latest batch
@@ -53,6 +55,7 @@ def pop_undo(undo_stack):
 		undo_stack.pop()
 	return undo_stack
 
+
 def last_undo(undo_stack):
 	"""Returns the latest id from the stack given
 	
@@ -64,6 +67,7 @@ def last_undo(undo_stack):
 	if len(undo_stack) == 0:
 		return 0
 	return undo_stack[-1]["id"]
+
 
 def run_undo(undo_stack, ls):
 	"""Runs the commands from the latest batch
@@ -80,6 +84,7 @@ def run_undo(undo_stack, ls):
 			return ls, undo_stack 
 		cmd["command"](ls, cmd["arg1"], cmd["arg2"])
 	return ls, undo_stack
+
 
 def choose_undo_id(kw):
 	"""Choose an undo_id based on the kw.
